@@ -1,0 +1,17 @@
+// ASS - Audio Stupidly Simple
+
+#pragma once
+
+{{ include_and_expand "soloud.h" }}
+
+{{ include "soloud_fftfilter.h" }}
+
+{{ header_files _ }}
+
+#ifdef ASS_IMPLEMENTATION
+
+#include "ass.h"
+
+{{ source_files _ }}
+
+#endif // ASS_IMPLEMENTATION

@@ -1,0 +1,7 @@
+build/soloud
+build/target
+sample/sample
+sample/*.wav
+sample/*.mp3
+sample/*.ogg
+sample/*.mid
