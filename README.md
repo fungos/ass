@@ -6,13 +6,13 @@ To KISS*, ASS supports only:
 - Wav/Mp3/Ogg/Flac formats
 - OpenAL/SDL2/ALSA/OSS/WASAP/WINMM/PortAudio backends
 
-Easy to use, no weird build scripts needed, just copy-compile-play!
+Easy to use and no weird build scripts needed, just copy-compile-play!
 
 *Dependencies may be required based on the backend used.
 
 ## Sample
 
-To test the sample, copy 3 files into the sample folder:
+To test the sample copy any 3 files into the sample folder, named as:
 - sound.wav
 - music1.mp3
 - music2.ogg
@@ -26,5 +26,7 @@ $ cd sample && ./compile.sh && ./sample
 ## License
 
 ass.cpp/ass.h is basically SoLoud, thus it is under SoLoud license terms.
+
 SoLoud, dr_mp3, dr_wav, dr_flac, stb_vorbis are under their own respective licenses.
+
 build/* is under MIT License.
