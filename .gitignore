@@ -1,6 +1,8 @@
 build/soloud
 build/target
 build/ass.h
+build/ass.cpp
+build/test/**
 sample/sample
 sample/*.wav
 sample/*.mp3

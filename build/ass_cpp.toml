@@ -1,4 +1,6 @@
-include_path = ["soloud/include"]
+template = "ass_cpp.hbs"
+output = "ass.cpp"
+include_path = []
 source_path = [
   "soloud/src/audiosource/wav"
 , "soloud/src/backend/alsa"
@@ -13,6 +15,7 @@ source_path = [
 , "soloud/src/backend/xaudio2"
 , "soloud/src/core"
 , "soloud/src/filter"
+, "patches/"
 ]
 ignore_file = [
   "soloud_vic.h"

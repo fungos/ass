@@ -1,5 +1,7 @@
-// g++ sample.cpp -I/usr/include/SDL2 -g -lSDL2 -lasound -ldl -lm -pthread -o sample
-// clang++ sample.cpp -I/usr/include/SDL2 -g -lSDL2 -lasound -ldl -lm -pthread -o sample
+// clang++ sample.cpp -DWITH_<BACKEND> -I/usr/include/SDL2 -I/usr/include/AL -g -lSDL2 -lasound -lopenal -ldl -pthread -o sample
+//
+// On my linux, SoLoud OpenAL and OSS backends are broken, it might be as well broken to you.
+//
 
 #include "../ass.h"
 
@@ -57,7 +59,7 @@ int main(int argc, char *argv[])
 	int gMusichandle1, gMusichandle2;
 
 	gMusic1.load("music1.mp3");
-	gMusic2.load("msuci2.ogg");
+	gMusic2.load("music2.ogg");
 
 	gMusic1.setLooping(1);
 	gMusic2.setLooping(1);

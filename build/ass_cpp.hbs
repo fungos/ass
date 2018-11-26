@@ -1,0 +1,14 @@
+// ASS - Audio Stupidly Simple
+
+
+{{ include_raw "dr_impl.cpp" }}
+
+#include "stb_vorbis.h"
+
+#include "ass.h"
+
+{{ include "patch_alsa.cpp" }}
+
+{{ include "soloud_alsa.cpp" }}
+
+{{ source_files _ }}

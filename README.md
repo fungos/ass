@@ -4,7 +4,7 @@ A really very simple audio library composed of only two files (implementation an
 
 To KISS*, ASS supports only:
 - Wav/Mp3/Ogg/Flac formats
-- OpenAL/SDL2/ALSA/OSS/WASAP/WINMM/PortAudio backends
+- OpenAL/SDL2/ALSA/OSS/WASAPI/WINMM/PortAudio backends
 
 Easy to use and no weird build scripts needed, just copy-compile-play!
 

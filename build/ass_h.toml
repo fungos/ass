@@ -1,0 +1,25 @@
+template = "ass_h.hbs"
+output = "ass.h"
+include_path = ["soloud/include"]
+source_path = [
+
+]
+ignore_file = [
+  "soloud_vic.h"
+, "soloud_vizsn.h"
+, "soloud_openmpt.h"
+, "soloud_speech.h"
+, "soloud_file_hack_off.h"
+, "soloud_file_hack_on.h"
+, "soloud_c.h"
+, "soloud_monotone.h"
+, "soloud_sfxr.h"
+, "soloud_tedsid.h"
+, "dr_flac.h"
+, "dr_mp3.h"
+, "dr_wav.h"
+, "stb_vorbis.h"
+, "stb_vorbis.c"
+, "soloud_sdl1.cpp"
+, "soloud_sdl1_dll.c"
+]

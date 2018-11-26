@@ -2,23 +2,6 @@
 
 #pragma once
 
-#include <SDL2/SDL.h>
-
-#define WITH_NULL
-
-#define WITH_SDL2 // SDL2
-#define WITH_SDL2_STATIC // SDL2
-#define WITH_ALSA // asound
-
-#if _WIN32
-#define WITH_XAUDIO2
-#define WITH_WINMM
-#endif
-
-#ifdef __APPLE__
-#define WITH_COREAUDIO // AudioToolbox.framework
-#endif
-
 /*
 SoLoud audio engine
 Copyright (c) 2013-2018 Jari Komppa
