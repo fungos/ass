@@ -1,6 +1,6 @@
 template = "ass_h.hbs"
 output = "ass.h"
-include_path = ["soloud/include"]
+include_path = ["soloud/include", "patches/includes"]
 source_path = [
 
 ]

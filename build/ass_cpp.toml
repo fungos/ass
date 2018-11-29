@@ -16,6 +16,7 @@ source_path = [
 , "soloud/src/core"
 , "soloud/src/filter"
 , "patches/"
+, "patches/src"
 ]
 ignore_file = [
   "soloud_vic.h"

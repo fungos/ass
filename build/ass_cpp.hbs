@@ -3,6 +3,13 @@
 
 {{ include_raw "dr_impl.cpp" }}
 
+#define TSF_IMPLEMENTATION
+#define TSF_NO_STDIO
+#include "tsf.h"
+#define TML_IMPLEMENTATION
+#define TML_NO_STDIO
+#include "tml.h"
+
 #include "stb_vorbis.h"
 
 #include "ass.h"
