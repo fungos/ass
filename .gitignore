@@ -8,3 +8,7 @@ sample/*.wav
 sample/*.mp3
 sample/*.ogg
 sample/*.mid
+sample/*.dll
+sample/.vs/
+.vs/
+sample/x64

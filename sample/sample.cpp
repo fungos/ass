@@ -2,92 +2,75 @@
 //
 // On my linux, SoLoud OpenAL and OSS backends are broken, it might be as well broken to you.
 //
-
 #include "../ass.h"
 
 #ifdef _MSC_VER
 #include <conio.h>
 int mygetch()
 {
-	return _getch();
+    return _getch();
 }
 #else
 #include <termios.h>
 #include <unistd.h>
 int mygetch( )
 {
-  struct termios oldt, newt;
-  int ch;
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  ch = getchar();
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  return ch;
+    struct termios oldt, newt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
 }
 #endif
 
-
 int main(int argc, char *argv[])
 {
-	SoLoud::Soloud soloud;
-	SoLoud::Wav wav;
+    SoLoud::Soloud soloud;
+    SoLoud::Wav wav;
+    SoLoud::WavStream mp3, ogg;
+    int mp3Handle, oggHandle;
 
-	soloud.init();
-	//soloud.setVisualizationEnable(1);
+    soloud.init();
+    wav.load("sound.wav");
+    wav.setLooping(1);
+    int wavHandle = soloud.play(wav);
 
-	wav.load("sound.wav");
-	wav.setLooping(1);
-	int handle1 = soloud.play(wav);
-	//soloud.setVolume(handle1, 0.5f);
-	//soloud.setPan(handle1, -0.2f);
-	//soloud.setRelativePlaySpeed(handle1, 0.9f);
+    while (soloud.getVoiceCount() > 1)
+    {
+        SoLoud::Thread::sleep(100);
+    }
+    fprintf(stdout, "playing sfx, press any key to continue...\n");
+    mygetch();
+    soloud.stop(wavHandle);
 
-	// Wait for voice to finish
-	while (soloud.getVoiceCount() > 1)
-	{
-		// Still going, sleep for a bit
-		SoLoud::Thread::sleep(100);
-	}
-	fprintf(stdout, "playing sfx.\n");
-	mygetch();
-	soloud.stop(handle1); // stop the wind sound
+    mp3.load("music1.mp3");
+    ogg.load("music2.ogg");
 
-	SoLoud::Soloud gSoloud;
-	SoLoud::WavStream gMusic1, gMusic2;
-	int gMusichandle1, gMusichandle2;
+    mp3.setLooping(1);
+    ogg.setLooping(1);
 
-	gMusic1.load("music1.mp3");
-	gMusic2.load("music2.ogg");
+    mp3Handle = soloud.play(mp3, 1, 0, 1);
+    oggHandle = soloud.play(ogg, 0, 0, 1);
 
-	gMusic1.setLooping(1);
-	gMusic2.setLooping(1);
+    SoLoud::handle groupHandle = soloud.createVoiceGroup();
+    soloud.addVoiceToGroup(groupHandle, mp3Handle);
+    soloud.addVoiceToGroup(groupHandle, oggHandle);
 
-	gSoloud.init(SoLoud::Soloud::CLIP_ROUNDOFF | SoLoud::Soloud::ENABLE_VISUALIZATION);
+    soloud.setProtectVoice(groupHandle, 1);
+    soloud.setPause(groupHandle, 0);
+    fprintf(stdout, "playing mp3, press any key to fade to ogg...\n");
+    mygetch();
 
-	gMusichandle1 = gSoloud.play(gMusic1, 1, 0, 1);
-	gMusichandle2 = gSoloud.play(gMusic2, 0, 0, 1);
+    soloud.fadeVolume(mp3Handle, 0, 2);
+    soloud.fadeVolume(oggHandle, 1, 2);
+    fprintf(stdout, "playing ogg, press any key to quit.\n");
+    mygetch();
+    soloud.destroyVoiceGroup(groupHandle);
 
-	SoLoud::handle grouphandle = gSoloud.createVoiceGroup();
-	gSoloud.addVoiceToGroup(grouphandle, gMusichandle1);
-	gSoloud.addVoiceToGroup(grouphandle, gMusichandle2);
-
-	gSoloud.setProtectVoice(grouphandle, 1); // protect all voices in group
-	gSoloud.setPause(grouphandle, 0);        // unpause all voices in group
-	fprintf(stdout, "playing music 1, press key to fade to music 2.\n");
-	mygetch();
-
-	gSoloud.fadeVolume(gMusichandle1, 0, 2);
-	gSoloud.fadeVolume(gMusichandle2, 1, 2);
-	fprintf(stdout, "playing music 2.\n");
-	mygetch();
-	gSoloud.destroyVoiceGroup(grouphandle); // remove group, leaves voices alone
-
-
-	// Clean up SoLoud
-	soloud.deinit();
-
-	// All done.
-	return 0;
+    soloud.deinit();
+    return 0;
 }
