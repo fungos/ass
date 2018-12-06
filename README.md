@@ -1,6 +1,6 @@
 # ASS: Audio Stupidly Simple
 
-A really very simple audio library composed of only two files (implementation and header) generated from a processed [SoLoud project](https://github.com/jarikomppa/soloud), removing audio synthesis features.
+A single header library for audio decoding and playback.
 
 To KISS*, ASS supports only:
 - Wav/Mp3/Ogg/Flac formats
@@ -9,6 +9,21 @@ To KISS*, ASS supports only:
 Easy to use and no weird build scripts needed, just copy-compile-play!
 
 *Dependencies may be required based on the backend used.
+
+## Using
+
+The `ass.h` embeds all the necessary decoding dependencies in it, you only need to do:
+
+```
+#define ASS_IMPLEMENTATION
+#include "ass.h"
+```
+and ready to go. Otherwise, if you already have dr_libs and stb_vorbis in your project, use the `ass_lite.h` version:
+
+```
+#define ASS_IMPLEMENTATION
+#include "ass_lite.h"
+```
 
 ## Sample
 
@@ -25,8 +40,8 @@ $ cd sample && ./compile.sh && ./sample
 
 ## License
 
-ass.cpp/ass.h is basically SoLoud, thus it is under SoLoud license terms.
+`ass.h` and `ass_lite.h` are basically [SoLoud](https://github.com/jarikomppa/soloud) minus some features, thus licensed under SoLoud license terms.
 
-SoLoud, dr_mp3, dr_wav, dr_flac, stb_vorbis are under their own respective licenses.
+[dr_mp3, dr_flac, dr_wav](https://github.com/mackron/dr_libs) and [stb_vorbis](https://github.com/nothings/stb) are under their own respective licenses.
 
 build/* is under MIT License.

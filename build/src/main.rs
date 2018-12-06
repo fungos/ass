@@ -251,15 +251,19 @@ fn load_contents(file: &str, clean: bool) -> String {
 fn collect_files(dir: &str, ignore_list: &[String]) -> Result<Vec<PathBuf>, Box<Error>> {
     let mut v = vec![];
     let dir = Path::new(dir);
-    for entry in dir.read_dir()? {
-        let entry = entry?;
-        let path = entry.path();
-        let metadata = fs::metadata(&path)?;
-        if metadata.is_file() && should_use_file(&path, &ignore_list) {
-            v.push(path);
+    if dir.is_file() && should_use_file(&dir, &ignore_list) {
+        v.push(PathBuf::from(dir));
+    }
+    else {
+        for entry in dir.read_dir()? {
+            let entry = entry?;
+            let path = entry.path();
+            let metadata = fs::metadata(&path)?;
+            if metadata.is_file() && should_use_file(&path, &ignore_list) {
+                v.push(path);
+            }
         }
     }
-
     Ok(v)
 }
 

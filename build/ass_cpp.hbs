@@ -3,9 +3,15 @@
 
 {{ include_raw "dr_impl.cpp" }}
 
-#include "stb_vorbis.h"
-
 #include "ass.h"
+
+{{ include "soloud_file_hack_on.h" }}
+
+#ifndef STB_VORBIS_INCLUDE_STB_VORBIS_H
+{{ include "stb_vorbis.c" }}
+#endif
+
+{{ include "soloud_file_hack_off.h" }}
 
 {{ include "patch_alsa.cpp" }}
 

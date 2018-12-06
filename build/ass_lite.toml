@@ -1,6 +1,6 @@
-template = "ass_cpp.hbs"
-output = "ass.cpp"
-include_path = []
+template = "ass_lite.hbs"
+output = "ass_lite.h"
+include_path = ["soloud/include"]
 source_path = [
   "soloud/src/audiosource/wav"
 , "soloud/src/backend/alsa"
@@ -32,6 +32,7 @@ ignore_file = [
 , "dr_mp3.h"
 , "dr_wav.h"
 , "stb_vorbis.h"
+, "stb_vorbis.c"
 , "soloud_sdl1.cpp"
 , "soloud_sdl1_dll.c"
 ]

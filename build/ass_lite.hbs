@@ -1,0 +1,39 @@
+// ASS - Audio Stupidly Simple
+
+#ifdef ASS_IMPLEMENTATION
+
+#include <stdio.h>
+
+{{ include_raw "dr_impl.cpp" }}
+
+{{ include "soloud_file_hack_on.h" }}
+
+#define STB_VORBIS_HEADER_ONLY
+#include "stb_vorbis.c"
+
+{{ include "soloud_file_hack_off.h" }}
+
+#endif
+
+#ifndef ASS_HEADER
+#define ASS_HEADER
+
+{{ include_and_expand "soloud.h" }}
+
+{{ include "soloud_fftfilter.h" }}
+
+{{ header_files _ }}
+
+#endif // ASS_HEADER
+
+// ASS_IMPLEMENTATION
+
+#ifdef ASS_IMPLEMENTATION
+
+{{ include "patch_alsa.cpp" }}
+
+{{ include "soloud_alsa.cpp" }}
+
+{{ source_files _ }}
+
+#endif // ASS_IMPLEMENTATION

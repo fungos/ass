@@ -2,6 +2,14 @@
 //
 // On my linux, SoLoud OpenAL and OSS backends are broken, it might be as well broken to you.
 //
+#ifdef _WIN32
+#define WITH_WINMM
+#else
+#define WITH_SDL
+#endif
+
+#define ASS_IMPLEMENTATION
+//#include "../ass_lite/ass_lite.h"
 #include "../ass.h"
 
 #ifdef _MSC_VER
